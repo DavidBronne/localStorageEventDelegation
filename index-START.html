@@ -31,10 +31,13 @@
   const items = JSON.parse(localStorage.getItem('items')) || [];
 
   function displayList (trucs) {
+    console.log('inDisplay');
+    console.log(itemsList);
+    
     itemsList.innerHTML = trucs.map( (truc,i) => {
       return `
           <li>
-            <input type="checkbox" id="item${i}" ${truc.checked} ? 'checked' : ''></input>
+            <input type="checkbox" data-index=${i} id="item${i}" ${truc.checked} ? 'checked' : ''></input>
             <label for="item${i}">${truc.text}</label>
           </li>
           `
@@ -58,10 +61,22 @@
 
   }
 
+  function toggleCheck (e) {
+    if (!e.target.matches('input')) return
+    
+    const index = e.target.dataset.index
+    console.log(`index`, index)
+    console.log(`items`, items)
+    items[index].checked = !items[index].checked
+    localStorage.setItem('items',JSON.stringify(items))
+    displayList(items)
+  }
+
   displayList(items)
   
-  
   addItems.addEventListener('submit', addToList)
+  itemsList.addEventListener('click', toggleCheck)
+  
 
 </script>
 

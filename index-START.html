@@ -30,14 +30,14 @@
   const itemsList = document.querySelector('.plates');
   const items = JSON.parse(localStorage.getItem('items')) || [];
 
-  function displayList (trucs) {
+  function displayList (trucs, domRouts) {
     console.log('inDisplay');
     console.log(itemsList);
     
-    itemsList.innerHTML = trucs.map( (truc,i) => {
+    domRouts.innerHTML = trucs.map( (truc,i) => {
       return `
           <li>
-            <input type="checkbox" data-index=${i} id="item${i}" ${truc.checked} ? 'checked' : ''></input>
+            <input type="checkbox" data-index=${i} id="item${i}" ${truc.checked ? 'checked' : ''}></input>
             <label for="item${i}">${truc.text}</label>
           </li>
           `
@@ -55,7 +55,7 @@
     }
     items.push(item)
     localStorage.setItem('items',JSON.stringify(items))
-    displayList(items)
+    displayList(items,itemsList)
     
     this.reset();
 
@@ -69,10 +69,10 @@
     console.log(`items`, items)
     items[index].checked = !items[index].checked
     localStorage.setItem('items',JSON.stringify(items))
-    displayList(items)
+    displayList(items,itemsList)
   }
 
-  displayList(items)
+  displayList(items,itemsList)
   
   addItems.addEventListener('submit', addToList)
   itemsList.addEventListener('click', toggleCheck)

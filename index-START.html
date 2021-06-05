@@ -34,10 +34,10 @@
     console.log('inDisplay');
     console.log(itemsList);
     
-    domRouts.innerHTML = trucs.map( (truc,i) => {
+    domRouts.innerHTML = trucs.map( (truc,i) => { //${truc.checked ? 'checked' : ''} instead of ${truc.checked} ? 'checked' : ''
       return `
           <li>
-            <input type="checkbox" data-index=${i} id="item${i}" ${truc.checked ? 'checked' : ''}></input>
+            <input type="checkbox" data-index=${i} id="item${i}" ${truc.checked ? 'checked' : ''}></input>  
             <label for="item${i}">${truc.text}</label>
           </li>
           `
